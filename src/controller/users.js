@@ -14,23 +14,23 @@ const UserController = {
         const { email, password } = req.body;
 
         if (!email || !password) return res.status(400).send({ error: "Dados insuficientes" });
-
+        console.log('Body contains email and password');
         try {
             let user = await User.findOne({ email }).select('+password');
-            return res.status(200).send(user);
+            console.log('User:' + user);
             const same = await bcrypt.compare(password, user.password);
-            
+            console.log('Same:' + same);
             if (!same) return res.status(400).send({ error: "Senha incorreta" });
 
             user.token_list.push(createUserToken(user._id));
-            
+            console.log('User:' + user);
             await user.save();
+            console.log('User saved');
+            user.password = undefined;
+            return res.status(200).send(user);
         } catch (err) {
             return res.status(400).send({ error: "Não foi possível cadastrar usuário" });
         }
-
-        user.password = undefined;
-        return res.status(200).send(user);
     },
     async registerUser(req, res) {
         const { name, email, password } = req.body;
