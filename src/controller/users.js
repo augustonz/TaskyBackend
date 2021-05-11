@@ -16,6 +16,7 @@ const UserController = {
         if (!email || !password) return res.status(400).send({ error: "Dados insuficientes" });
         console.log('Body contains email and password');
         try {
+            console.log('inside try');
             let user = await User.findOne({ email }).select('+password');
             console.log('User:' + user);
             const same = await bcrypt.compare(password, user.password);
@@ -29,6 +30,7 @@ const UserController = {
             user.password = undefined;
             return res.status(200).send(user);
         } catch (err) {
+            console.log('inside catch');
             return res.status(400).send({ error: "Não foi possível cadastrar usuário" });
         }
     },
@@ -46,12 +48,12 @@ const UserController = {
             newUser.token_list.push(createUserToken(newUser._id));
 
             await newUser.save();
+
+            newUser.password = undefined;
+            return res.status(201).send(newUser);
         } catch (err) {
             return res.status(400).send({ error: "Erro ao salvar usuário" });
         }
-
-        newUser.password = undefined;
-        return res.status(201).send(newUser);
     },
 
     async logout(req, res) {
