@@ -1,0 +1,43 @@
+{
+  "name": "tasky",
+  "version": "1.0.0",
+  "description": "Gerenciador de tarefas da Codex-Jr",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=prod node src/server.js",
+    "test": "cross-env NODE_ENV=test mocha",
+    "dev": "cross-env NODE_ENV=dev nodemon src/server.js"
+  },
+  "author": "Augusto Nunes & Franklin Regis",
+  "license": "ISC",
+  "homepage": "https://tasky-codex.herokuapp.com",
+  "repository": "github:franklingg/Tasky",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "module-alias": "^2.2.2",
+    "mongoose": "^5.12.2",
+    "nodemailer": "^6.5.0",
+    "nodemon": "^2.0.7"
+  },
+  "_moduleAliases": {
+    "@app": "src/app.js",
+    "@config": "src/config/index.js",
+    "@controller": "src/controller",
+    "@middlewares": "src/middlewares",
+    "@routes": "src/routes",
+    "@model": "src/model"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "eslint": "^7.23.0",
+    "mocha": "^8.3.2",
+    "mongodb-memory-server": "^6.9.6"
+  }
+}
